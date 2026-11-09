@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">計算機</string>
+    <string name="btn_calc">計算する</string>
+    <string-array name="operator_array">
+        <item>+</item>
+        <item>-</item>
+        <item>*</item>
+        <item>/</item>
+    </string-array>
+</resources>
