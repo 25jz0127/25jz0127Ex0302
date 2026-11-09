@@ -1,4 +1,5 @@
 package jp.ac.jec.jz.jz250127.ex0302;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,7 +14,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         Button btCalc = findViewById(R.id.btCalc);
         CalcListener listener = new CalcListener();
         btCalc.setOnClickListener(listener);
@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
             int id = view.getId();
 
             if (id == R.id.btCalc) {
-                String value1 = etValue1.getText().toString();
+               String value1 = etValue1.getText().toString();
                 String value2 = etValue2.getText().toString();
                 String operator = spOperator.getSelectedItem().toString();
                 String expression;
@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
                     int num1 = Integer.parseInt(value1);
                     int num2 = Integer.parseInt(value2);
                     int ret = 0;
+                    boolean isError = false;
 
                     switch (operator) {
                         case "+":
@@ -53,11 +54,21 @@ public class MainActivity extends AppCompatActivity {
                             ret = num1 * num2;
                             break;
                         case "/":
-                            ret = num1 / num2;
+                            if (num2 == 0) {
+                                isError = true;
+                            } else {
+                                ret = num1 / num2;
+                            }
                             break;
                     }
-                    expression = value1 + operator + value2 + "=" + ret;
+
+                    if (isError) {
+                        expression = "計算エラー";
+                    } else {
+                        expression = value1 + operator + value2 + "=" + ret;
+                    }
                 }
+
                 tvResult.setText(expression);
             }
         }
